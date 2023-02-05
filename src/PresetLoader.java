@@ -18,7 +18,7 @@ public class PresetLoader{
 			
 			String FileName = Name +" "+ PresetType;
 			
-										//Requires whole directory , didnt realise this and was struggling, 
+										//Loads presets from directory 
 			File TextFile = new File("src/Templates/" + FileName);
 
 			try {

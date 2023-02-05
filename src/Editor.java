@@ -17,7 +17,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.*;
+import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 
 public class Editor extends JFrame implements ActionListener {
@@ -263,13 +266,38 @@ public class Editor extends JFrame implements ActionListener {
 				}
 				
 				
+		//creates an undo manager
+		UndoManager undoManager = new UndoManager();
+		
+		Page.getDocument().addUndoableEditListener(new UndoableEditListener() {
+			public void undoableEditHappened(UndoableEditEvent e) {
+			    undoManager.addEdit(e.getEdit());
+			}		
+		});
 				
 		//Edit > Undo
 		if(e.getSource()==UndoItem) {			
-			
+			try {
+			    undoManager.undo();
+			  } catch (CannotUndoException ex) {
+			    // handle error
+			  }
+		}		
+		
+		//Edit > Redo
+		if(e.getSource()==RedoItem) {			
+			 try {
+				    undoManager.redo();
+				  } catch (CannotRedoException ex) {
+				    // handle error
+				  }
 		}		
 				
 				
+		
+		
+		
+		
 		//Edit > Copy
 		if(e.getSource()==CopyItem) {			
 			Copy();			//call copy function
