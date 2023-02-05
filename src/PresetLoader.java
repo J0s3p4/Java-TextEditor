@@ -19,7 +19,7 @@ public class PresetLoader{
 			String FileName = Name +" "+ PresetType;
 			
 										//Requires whole directory , didnt realise this and was struggling, 
-			File TextFile = new File("C:\\Users\\44785\\workspace\\Java-TextEditor\\textEditor\\src\\Templates\\" + FileName);
+			File TextFile = new File("src/Templates/" + FileName);
 
 			try {
 				// String
